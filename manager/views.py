@@ -27,13 +27,9 @@ class LoginView(View):
         return render(request, 'manager/login.html', content)
 
     def post(self, request):
-        print("post called")
         form = LoginForm(request.POST)
-        print("post form get")
         if form.is_valid():
-            print("form is valid")
             company_info = form.login()
-            print("login is valid")
             if company_info is None:
                 return redirect('login')
             if company_info['state'] == 'admin':
@@ -225,5 +221,3 @@ class ChangeInfoView(View):
             return redirect('company', company_id)
 
         
-
-
