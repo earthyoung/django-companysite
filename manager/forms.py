@@ -81,7 +81,6 @@ class LoginForm(forms.Form):
             'company_id': 0,
             'state': 'admin',
             }
-            print("admin logged in")
             return content
 
         # company case
@@ -226,13 +225,6 @@ class ChangePasswordForm(forms.Form):
             print(err)
             raise Exception("비밀번호 변경 중 오류가 발생했습니다.")
             
-                
 
-
-
-
-
-        
-
-
-
+         
+            
