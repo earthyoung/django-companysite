@@ -1,0 +1,50 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>COMPANY</h1>
+<div>
+    <h2>Company</h2>
+    <p>
+        <a href="{% url 'logout' %}">로그아웃</a>
+    </p>
+    <a href="{% url 'change_info' info='email' company_id=company.id %}">이메일 바꾸기</a>
+    <a href="{% url 'change_info' info='password' company_id=company.id %}">비밀번호 바꾸기</a>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이메일</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>회사명</th>
+                <th>이미지 1</th>
+                <th>이미지 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ company.id }}</td>
+                <td>{{ company.email }}</td>
+                <td>{{ company.name }}</td>
+                <td>{{ company.phone }}</td>
+                <td>{{ company.business_name }}</td>
+                <td>
+                    {% if company.img1.img %}
+                    <img src="{{ company.img1.img.url }}" alt="" style="height:70px;">
+                    {% else %}
+                    <img src="{% static 'manager/no_image.jpg' %}" alt="" style="height:70px;">
+                    {% endif %}
+                </td>
+                <td>
+                    {% if company.img2.img %}
+                    <img src="{{ company.img2.img.url }}" alt="" style="height:70px">
+                    {% else %}
+                    <img src="{% static 'manager/no_image.jpg' %}" alt="" style="height:70px;">
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

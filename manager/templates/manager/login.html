@@ -1,0 +1,15 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>로그인</h1>
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table><br>
+    <button type="submit">로그인</button>
+</form>
+<p>
+    <a href="{% url 'index' %}">시작 페이지로</a>
+</p>
+{% endblock %}

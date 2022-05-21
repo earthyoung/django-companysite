@@ -1,0 +1,78 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>ADMIN</h1>
+<div>
+    <p>
+        <a href="{% url 'logout' %}">로그아웃</a>
+    </p>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이메일</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>회사명</th>
+                <th>이미지 1</th>
+                <th>이미지 2</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>    
+        </thead>
+        <tbody>
+        {% for company in companies %} 
+        <tr>
+            <td>{{ company.id }}</td>
+            <td>{{ company.email }}</td>
+            <td>{{ company.name }}</td>
+            <td>{{ company.phone }}</td>
+            <td>{{ company.business_name }}</td>
+            <td>
+                {% if company.img1.img %}
+                <img src="{{ company.img1.img.url }}" alt="" style="height:70px;">
+                {% else %}
+                <img src="{% static 'manager/no_image.jpg' %}" alt="" style="height:70px;">
+                {% endif %}
+            </td>
+            <td>
+                {% if company.img2.img %}
+                <img src="{{ company.img2.img.url }}" alt="" style="height:70px">
+                {% else %}
+                <img src="{% static 'manager/no_image.jpg' %}" alt="" style="height:70px;">
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'manage_update' company_id=company.id %}">수정하기</a>
+            </td>
+            <td>
+                <a href="{% url 'manage_delete' company_id=company.id %}">삭제하기</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <div class="pagination">
+        <span style="width:100%;">
+            {% if companies.has_previous %}
+            <a href="?page=1">first</a>
+            <a href="?page={{ companies.previous_page_number }}">{{ companies.previous_page_number }}</a>
+            {% endif %}
+
+            <span>
+                {{ companies.number }}
+            </span>
+
+            {% if companies.has_next %}
+            <a href="?page={{ companies.next_page_number }}">{{ companies.next_page_number }}</a>
+            <a href="?page={{ companies.paginator.num_pages }}">last</a>
+            {% endif %}
+        </span>
+    </div>
+    <br><br><br>
+</div>
+
+{% endblock %}

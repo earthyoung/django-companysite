@@ -1,0 +1,25 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>회원정보 변경</h1>
+{% if email %}
+<form action="{% url 'change_info' info=email company_id=company_id %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table><br>
+    <button type="submit">이메일 변경하기</button>
+</form>
+{% else %}
+<form action="{% url 'change_info' info=password company_id=company_id %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table><br>
+    <button type="submit">비밀번호 변경하기</button>
+</form>
+{% endif %}
+<p>
+    <a href="{% url 'index' %}">개인 페이지로</a>
+</p>
+{% endblock %}

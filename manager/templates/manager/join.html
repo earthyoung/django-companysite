@@ -1,0 +1,26 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+<h1>회원가입</h1><br>
+<div>
+    <h5>비밀번호는 영어 대소문자, 숫자, 특수문자를 모두 포함해야 하며, 8자 이상 20자 이내입니다.</h5>
+    <h5>이름과 회사명은 특수문자를 포함할 수 없고 중복될 수 없으며, 5자 이상 20자 이내입니다.</h5>
+    <h5>전화번호는 010-1234-1234 또는 01012341234 두 형식중 하나로 입력해야 합니다.</h5>
+    <h5>이미지 파일은 최대 2개까지 첨부할 수 있으며, 첨부하지 않을 수도 있습니다.</h5>
+</div>
+<br>
+<form action="{% url 'join' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table><br>
+    <input type="submit" value="가입하기">
+</form>
+<br>
+<p>
+    <a href="{% url 'index' %}">시작 페이지로</a>
+</p>
+{% endblock %}
+
+
+
